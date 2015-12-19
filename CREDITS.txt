@@ -1,0 +1,52 @@
+This is a list of assets that are currently in the game. If yours isn't on here- it's not in the game yet.
+
+Sprites
+	Falcon: Revangale - Owl and Raven Sprites [CC-BY-SA 3.0] [modified by Chris Leclair and Eiko Takeoka]
+	Sparrow: doudoulolita - Parrot (macaw) [CC-BY-SA 3.0] [modified by Chris Leclair]
+	Parrot: MoikMellah - Animated Birds (32x32) [CC0] [modified by Eiko Takeoka]
+	Flak Tower: Eiko Takeoka
+	Flak Tower Explosion: ansimuz - Animated Explosions [CC0]
+	Bullet: Eiko Takeoka
+	Bullet Explosion: helpcomputer - Explosions [CC-BY 3.0]
+	Branch: Jaymee Tan
+
+Graphics
+	Menu and Ending cards: Chris Leclair
+	Buttons: Chris Leclair
+
+Backgrounds
+	Jordan Trudgett - Backdrops for story and level (for Ardentryst) [CC-BY 3.0]
+	ansimuz - Mountain at Dusk Background [CC0]
+	ansimuz - Industrial Parallax Background [CC0]
+	Clint Bellanger - Heroine Dusk (shop background) [CC-BY-SA 3.0]
+	Alucard - City Background Repetitive 2 [CC-BY 3.0]
+	Kenney - Tappy Plane [CC0]
+	Chris Leclair - City Background [modified from public domain image]
+	Jaymee Tan - Industrial Background
+	Jaymee Tan - Forest Background
+	Jaymee Tan - Outpost Background
+	Jaymee Tan - Intro Background
+
+Sound Effects
+	Screaming Hawk-SoundBible.com-1210664501
+	Parrot squawk:
+	Parots Talking-SoundBible.com-587469366 (EDIT)_data
+	Sparrow hit:
+	bluejay_call-Mike_Koenig-591302150(EDIT)_data
+	Gunshot:
+	M1 Garand Gun-SoundBible.com-1519788442(EDIT)_data
+
+Music
+	Trevor Lentz - Night - Flicker [CC-BY-SA 3.0] http://opengameart.org/content/night
+	Pugly - Sad Piano [CC-BY 3.0] https://soundcloud.com/megapixelmusic 
+	Tozan - Longbuststrings [CC0]
+	Marcelo Fernandez - TWD - Fan Made Music [CC-BY 3.0] https://soundcloud.com/marcelofernandezmusic
+	el-corleo - Solemn War Music [CC-BY 3.0]
+	Alexandr Zhelanov - Melancholy RPG [CC-BY 3.0] https://soundcloud.com/alexandr-zhelanov
+	Snabisch - No Man's Land Loop [CC-BY-NC-ND 3.0] //should probably replace this actually
+	bf5man - Battle Escape [CC-BY 3.0]
+	Trevor Lentz - Salvation [CC-BY-SA 3.0]
+	Erie - Home [CC-BY 3.0]
+	
+	
+	

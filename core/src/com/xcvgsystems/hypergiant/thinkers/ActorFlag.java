@@ -1,0 +1,6 @@
+package com.xcvgsystems.hypergiant.thinkers;
+
+public enum ActorFlag
+{
+	DONTSCROLL, SPAWNONCE, SPAWNFLOOR, NOGRAVITY, HURTSPLAYER, HURTSMONSTER, KEEPOFFSCREEN, KEEPALWAYS, ISMONSTER, PROJECTILE 
+}
