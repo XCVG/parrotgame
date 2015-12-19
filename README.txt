@@ -37,7 +37,7 @@ Parrotgame uses the Hypergiant engine, a custom engine built on libGDX. It was o
 
 In theory, it supports all platforms libGDX supports. In practice, only the desktop Java version is playable. It builds for Android with no problems but lacks touch controls or lifecycle management. I don't have a Mac to try building for iOS and I haven't been able to get GWT to work to build HTML5.
 
-Provided it's still up, you can get the source code at https://bitbucket.org/XCVGVCX/parrotgame.git
+Provided it's still up, you can get the source code at https://github.com/XCVG/parrotgame
 
 ----- LICENSE -----
 
