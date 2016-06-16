@@ -1,0 +1,208 @@
+[MAP01]
+name="The Outpost"
+music="A_BATTLE"
+time=60
+background="OUTPOSTBACK"
+foreground="!NULL"
+fgheight=96
+bgscroll=4
+fgscroll=4
+speed=4
+enemy1="FlakTurret"
+enemy1rate=25
+enemy2="InvisibleFlakTurret"
+enemy2rate=25
+next="MENU01"
+endnext="EndBad"
+endtext="You made it!"
+
+[MENU01]
+title="The Town"
+description="The town is in disarray. Must go to next town. Army is showing up to base."
+background="back_town1"
+music="M_INTER"
+choice1="MAP02"
+choice1title="Mountains"
+choice1text="Fly high and evade shots from below."
+choice2="MAP03"
+choice2title="The Hills"
+choice2text="Fly a safer, slower route over the hills."
+
+[MAP02]
+name="The Mountains"
+music="M_MOUNT"
+time=30
+background="MOUNTBACK"
+foreground="PROCK"
+fgheight=64
+bgscroll=5
+fgscroll=10
+speed=10
+enemy1="KamikazeBird"
+enemy1rate=10
+enemy2="InvisibleFlakTurret"
+enemy2rate=200
+next="MENU02"
+endnext="EndBad"
+endtext="You made it!"
+
+[MAP03]
+name="The Foothills"
+music="M_MOUNT"
+time=60
+background="MOUNTBACK"
+foreground="PGRASS"
+fgheight=64
+bgscroll=3
+fgscroll=6
+speed=6
+enemy1="InvisibleFlakTurret"
+enemy1rate=25
+enemy2="KamikazeBird"
+enemy2rate=25
+next="MENU02"
+endnext="EndBad"
+endtext="You made it!"
+
+[MENU02]
+title="The Forest"
+description="You’ve had to stop to a nearby dense forest.  Night is approaching."
+background="back_forest"
+music="M_INTER"
+choice1="MAP04"
+choice1title="Next Town"
+choice1text=" It’s time to head out. Another town is nearby."
+
+[MAP04]
+name="The Forest"
+music="M_FOREST"
+time=60
+background="FORESTBACK"
+foreground="!NULL"
+fgheight=72
+bgscroll=4
+fgscroll=4
+speed=4
+enemy1="InvisibleFlakTurret"
+enemy1rate=10
+enemy2="KamikazeBird"
+enemy2rate=10
+enemy3="TreeBranch"
+enemy3rate=100
+next="MENU03"
+endnext="EndBad"
+endtext="You made it!"
+
+[MENU03]
+title="The Town"
+description="You’ve been forced to take refuge in the town."
+background="back_town2"
+music="M_INTER"
+choice1="MAP05"
+choice1title="Dense Route"
+choice1text="Best to avoid attention.."
+choice2="MAP06"
+choice2title="Less Dense Route"
+choice2text="There is a less dense route."
+
+[MAP05]
+name="Dense Route"
+music="M_ROUTE"
+time=30
+background="MORNBACK"
+foreground="DGRASSBACK"
+fgheight=64
+bgscroll=3
+fgscroll=6
+speed=6
+enemy1="FlakTurret"
+enemy1rate=25
+enemy2="KamikazeBird"
+enemy2rate=50
+enemy3="KamikazeFalcon"
+enemy3rate=25
+next="MENU04"
+endnext="EndBad"
+endtext="You made it!"
+
+[MAP06]
+name="Less Dense Route"
+music="M_ROUTE"
+time=60
+background="MORNBACK"
+foreground="DGRASSBACK"
+fgheight=64
+bgscroll=3
+fgscroll=6
+speed=6
+enemy1="FlakTurret"
+enemy1rate=25
+enemy2="KamikazeBird"
+enemy2rate=25
+enemy3="KamikazeFalcon"
+enemy3rate=10
+next="MENU04"
+endnext="EndBad"
+endtext="You made it!"
+
+[MENU04]
+title="The City"
+description="Just as you reach the city, a falcon managed to get you. You’re injured now."
+background="back_city"
+music="M_INTER"
+choice1="MAP07"
+choice1title="The Outskirts"
+choice1text="Two hours left. You've gotta try."
+
+[MAP07]
+name="Outskirts"
+music="M_CITY"
+time=60
+background="INDBACK"
+foreground="INDFORE"
+fgheight=0
+bgscroll=3
+fgscroll=6
+speed=6
+enemy1="FlakTurret"
+enemy1rate=25
+enemy2="KamikazeBird"
+enemy2rate=25
+enemy3="InvisibleFlakTurret"
+enemy3rate=25
+next="MENU05"
+endnext="EndBad"
+endtext="You made it!"
+special="drawforeground"
+
+[MENU05]
+title="Outskirts"
+description="If you want to survive, you have to make it to the next base."
+background="back_outs"
+music="M_INTER"
+choice1="MAP08"
+choice1title="The Base"
+choice1text="You can make it."
+
+[MAP08]
+name="The End Run"
+music="A_BATTLE"
+time=180
+background="OUTPOSTBACK"
+foreground="!NULL"
+fgheight=96
+bgscroll=3
+fgscroll=6
+speed=6
+enemy1="FlakTurret"
+enemy1rate=25
+enemy2="KamikazeBird"
+enemy2rate=50
+enemy3="InvisibleFlakTurret"
+enemy3rate=50
+enemy4="KamikazeFalcon"
+enemy4rate=25
+next="EndGood"
+endnext="EndBad"
+endtext="You made it!"
+special="endmap"
