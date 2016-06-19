@@ -46,7 +46,7 @@ public class NextMapOverlay extends Overlay {
 		}
 
 		//check for input
-		if(InputManager.isUsePressed() || InputManager.isTouchPressed())
+		if(InputManager.isUsePressed() || InputManager.isTouchPressed() || InputManager.isStartPressed())
 		{
 			//SceneManager.changeScene(next);
 			SceneManager.changeScene("MainMenu");

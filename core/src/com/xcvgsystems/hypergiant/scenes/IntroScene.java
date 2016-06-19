@@ -21,7 +21,7 @@ public class IntroScene extends ImageScene {
 		}
 
 		//check for input and go to the next scene if it's there
-		if(InputManager.isUsePressed() || InputManager.isTouchJustPressed())
+		if(InputManager.isUsePressed() || InputManager.isStartPressed() || InputManager.isTouchJustPressed())
 		{
 			int mapnum = MathUtils.random.nextInt(8) + 1;
 			SceneManager.changeScene("MAP0" + mapnum);

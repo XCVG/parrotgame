@@ -21,9 +21,10 @@ public class MainMenu extends Menu {
 		objects.add(new MenuText(WIDTH/2, 400, MenuObject.LAYER_OBJECT, "SMALLFNT", "For want of a message...", this));
 		objects.add(new MenuImage(WIDTH/2, HEIGHT/2 + 40, 400, 300, MenuObject.LAYER_WINDOW, "UI_frame", this));
 		objects.add(new MenuImage(WIDTH/2, 60, 400, 100, MenuObject.LAYER_WINDOW, "menu_title", this));
-		objects.add(new MenuButton(WIDTH/2, (int)(HEIGHT/2.5f), 200, 80, MenuObject.LAYER_OBJECT, "button_start", 1, this));
+		objects.add(new MenuButton(WIDTH/2, 180, 200, 80, MenuObject.LAYER_OBJECT, "button_start", 1, this));
 		//objects.add(new MenuButton(WIDTH/2, (int)(HEIGHT/1.5f), 200, 80, MenuObject.LAYER_OBJECT, "button_exit", 2, this));
-		objects.add(new MenuButton(WIDTH/2, (int)(HEIGHT/1.5f), 200, 80, MenuObject.LAYER_OBJECT, "button_help", 3, this));
+		//objects.add(new MenuButton(WIDTH/2, (int)(HEIGHT/1.5f), 200, 80, MenuObject.LAYER_OBJECT, "button_help", 3, this));
+		objects.add(new MenuImage(WIDTH/2, 320, 320, 200, MenuObject.LAYER_OBJECT, "UI_controls", this));
 		
 		//create buttons
 		
@@ -48,13 +49,14 @@ public class MainMenu extends Menu {
 	public void update() {
 		super.update();
 		
+		//grosser hack to prevent instant restarts
 		antiRestartTimer++;
 		
 		if(antiRestartTimer < 120)
 			return;
 		
 		//gross hack to support starting with a controller
-		if(InputManager.isUsePressed())
+		if(InputManager.isUsePressed() || InputManager.isStartPressed())
 		{
 			invokeEvent(1);
 		}

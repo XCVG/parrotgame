@@ -187,6 +187,16 @@ public class InputManager {
 	}
 	
 	/**
+	 * Check if the start key is pressed.
+	 * @return if the start key is pressed
+	 */
+	public static boolean isStartPressed()
+	{
+		return controller.getButton(9);
+		
+	}
+	
+	/**
 	 * Check if the fire key is pressed.
 	 * @return if the fire key is pressed
 	 */
