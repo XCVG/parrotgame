@@ -53,8 +53,11 @@ public class InputManager {
 		}
 		
 		//fallback if you plug in the wrong controller
-		InputManager.controller = Controllers.getControllers().first();
-		System.err.println("Warning! Logitech Dual Action not detected! Using " + controller.getName() + " !");
+		if(controller == null)
+		{
+			InputManager.controller = Controllers.getControllers().first();
+			System.err.println("Warning! Logitech Dual Action not detected! Using " + controller.getName() + " !");
+		}
 		
 		
 		System.out.println("done!");
