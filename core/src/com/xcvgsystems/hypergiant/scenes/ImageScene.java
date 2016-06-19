@@ -12,7 +12,7 @@ import com.xcvgsystems.hypergiant.managers.TextureManager;
 
 public class ImageScene extends StaticScene {
 
-	static final int TICK_DELAY = 10;
+	static final int TICK_DELAY = 30;
 	
 	protected TextureRegion background;
 	protected String music;

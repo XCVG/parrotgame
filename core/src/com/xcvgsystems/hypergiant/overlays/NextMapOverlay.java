@@ -48,7 +48,8 @@ public class NextMapOverlay extends Overlay {
 		//check for input
 		if(InputManager.isUsePressed() || InputManager.isTouchPressed())
 		{
-			SceneManager.changeScene(next);
+			//SceneManager.changeScene(next);
+			SceneManager.changeScene("MainMenu");
 			SceneManager.setRunning(true);
 			//OverlayManager.deactivateOverlay(this); //well that seems pretty safe
 			//ticksActive = 0;

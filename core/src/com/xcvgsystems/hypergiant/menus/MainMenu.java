@@ -1,6 +1,7 @@
 package com.xcvgsystems.hypergiant.menus;
 
 import com.badlogic.gdx.Gdx;
+import com.xcvgsystems.hypergiant.managers.InputManager;
 import com.xcvgsystems.hypergiant.managers.MusicManager;
 import com.xcvgsystems.hypergiant.managers.SceneManager;
 import com.xcvgsystems.hypergiant.managers.StateManager;
@@ -10,6 +11,8 @@ public class MainMenu extends Menu {
 	
 	protected final String D_MUSIC = "M_TITLE";
 
+	int antiRestartTimer = 0;
+	
 	public MainMenu() {
 		super();
 		//MusicManager.play(D_MUSIC, true);
@@ -30,6 +33,7 @@ public class MainMenu extends Menu {
 	@Override
 	public void enter() {
 		super.enter();
+		antiRestartTimer = 0;
 		MusicManager.play(D_MUSIC, true);
 		
 	}
@@ -43,6 +47,20 @@ public class MainMenu extends Menu {
 	@Override
 	public void update() {
 		super.update();
+		
+		antiRestartTimer++;
+		
+		if(antiRestartTimer < 120)
+			return;
+		
+		//gross hack to support starting with a controller
+		if(InputManager.isUsePressed())
+		{
+			invokeEvent(1);
+		}
+		
+		
+		
 	}
 
 	@Override

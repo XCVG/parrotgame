@@ -12,6 +12,7 @@ import com.xcvgsystems.hypergiant.menus.GenericMenu;
 import com.xcvgsystems.hypergiant.menus.MainMenu;
 import com.xcvgsystems.hypergiant.menus.Menu;
 import com.xcvgsystems.hypergiant.scenes.ImageScene;
+import com.xcvgsystems.hypergiant.scenes.IntroScene;
 import com.xcvgsystems.hypergiant.scenes.MenuScene;
 import com.xcvgsystems.hypergiant.scenes.ScrollScene;
 
@@ -38,7 +39,7 @@ public class ParrotLoader {
 		System.out.print("Init Scenes...");
 		
 		SceneManager.addScene("TestScene", new ScrollScene());
-		SceneManager.addScene("IntroScene", new ImageScene("menu_intro", "M_TITLE", "MAP01"));
+		SceneManager.addScene("IntroScene", new IntroScene("menu_intro", "M_TITLE", "MAP01"));
 		SceneManager.addScene("EndScene", new ImageScene("menu_end", "M_END", "MainMenu"));
 		
 		SceneManager.addScene("Help1", new ImageScene("menu_help1", "M_TITLE", "Help2"));
