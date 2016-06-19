@@ -2,12 +2,14 @@ package com.xcvgsystems.hypergiant.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.*;
 
 //not sure how libGDX deals with input, so... abstract it
 //TODO: dear god this is poorly written... refactor it
 
 /**
  * Provides input services.
+ * Gross hacks have been added to support a controller.
  * @author Chris
  *
  */
@@ -29,6 +31,7 @@ public class InputManager {
 	
 	private static InputDirection inputDirection;
 	private static int touchX, touchY;
+	private static Controller controller;
 	
 	/**
 	 * Initialize the InputManager
@@ -36,6 +39,18 @@ public class InputManager {
 	public static void init()
 	{
 		System.out.print("InputManager.init...");
+		
+		/*
+		for (Controller controller : Controllers.getControllers()) {
+		   	System.out.println(controller.toString() + controller.getName());
+		*/
+		for (Controller controller : Controllers.getControllers())
+		{
+			if(controller.getName().equalsIgnoreCase("Logitech Dual Action")) //yes it's fucking hardcoded
+			{
+				InputManager.controller = controller; //yes I'm dumb
+			}
+		}
 		
 		System.out.println("done!");
 	}
@@ -47,6 +62,7 @@ public class InputManager {
 	{
 		getDirectionKeys();
 		getTouchCoords();
+		getControllerInput();
 	}
 	
 	/**
@@ -55,6 +71,8 @@ public class InputManager {
 	public static void dispose()
 	{
 		System.out.print("InputManager.dispose...");
+		
+		Controllers.clearListeners();
 		
 		System.out.println("done!");
 	}
@@ -65,7 +83,7 @@ public class InputManager {
 	 */
 	public static boolean isTouchPressed()
 	{
-		boolean pressed = Gdx.input.isTouched() || Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+		boolean pressed = Gdx.input.isTouched() || Gdx.input.isButtonPressed(Input.Buttons.LEFT) || controller.getButton(1);
 		//System.err.println(pressed);
 		return pressed; 
 	}
@@ -120,13 +138,13 @@ public class InputManager {
 		switch(direction)
 		{
 		case DOWN:
-			return Gdx.input.isKeyPressed(Input.Keys.DOWN);
+			return Gdx.input.isKeyPressed(Input.Keys.DOWN) || controller.getPov(0).equals(PovDirection.south) || controller.getPov(0).equals(PovDirection.southEast) || controller.getPov(0).equals(PovDirection.southWest);
 		case LEFT:
-			return Gdx.input.isKeyPressed(Input.Keys.LEFT);
+			return Gdx.input.isKeyPressed(Input.Keys.LEFT) || controller.getPov(0).equals(PovDirection.west) || controller.getPov(0).equals(PovDirection.southWest) || controller.getPov(0).equals(PovDirection.northWest);
 		case RIGHT:
-			return Gdx.input.isKeyPressed(Input.Keys.RIGHT);
+			return Gdx.input.isKeyPressed(Input.Keys.RIGHT) || controller.getPov(0).equals(PovDirection.east) || controller.getPov(0).equals(PovDirection.southEast) || controller.getPov(0).equals(PovDirection.northEast);
 		case UP:
-			return Gdx.input.isKeyPressed(Input.Keys.UP);
+			return Gdx.input.isKeyPressed(Input.Keys.UP) || controller.getPov(0).equals(PovDirection.north) || controller.getPov(0).equals(PovDirection.northEast) || controller.getPov(0).equals(PovDirection.northWest);
 		default:
 			return false;	
 		}
@@ -159,7 +177,7 @@ public class InputManager {
 	 */
 	public static boolean isUsePressed()
 	{
-		return Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.ENTER);
+		return Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.ENTER) || controller.getButton(1);
 		
 	}
 	
@@ -196,7 +214,7 @@ public class InputManager {
 	 */
 	public static boolean isShiftPressed()
 	{
-		return Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
+		return Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || controller.getButton(1);
 	}
 	
 	/**
@@ -253,9 +271,10 @@ public class InputManager {
 		
 		return null;
 	}
-
+	
 	private static void getDirectionKeys()
 	{
+		//do we need to do an override check here?
 		
 		//are NEW keys pressed?
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
@@ -300,6 +319,32 @@ public class InputManager {
 			touchX = Gdx.input.getX();
 			touchY = Gdx.input.getY();
 		}
+	}
+	
+	private static void getControllerInput()
+	{
+		//check if input direction is not null so we don't override the keyboard input
+		if(inputDirection != null)
+			return;
+		
+		//otherwise look at the controller
+		if(controller.getPov(0).equals(PovDirection.north))
+		{
+			inputDirection = InputDirection.UP;
+		}
+		else if(controller.getPov(0).equals(PovDirection.south))
+		{
+			inputDirection = InputDirection.DOWN;
+		}
+		else if(controller.getPov(0).equals(PovDirection.west))
+		{
+			inputDirection = InputDirection.LEFT;
+		}
+		else if(controller.getPov(0).equals(PovDirection.east))
+		{
+			inputDirection = InputDirection.RIGHT;
+		}
+		
 	}
 	
 

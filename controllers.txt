@@ -1,0 +1,36 @@
+Logitech Dual Action
+
+Lstick X : Axis 3
+Lstick Y : Axis 2
+Rstick X : Axis 1
+Rstick Y : Axis 0
+
+Lstick click: button 10
+Rstick click: button 11
+
+Dpad Up : pov 0 north
+Dpad Dn : pov 0 south
+Dpad Lf : pov 0 west
+Dpad Rt : pov 0 east
+
+
+control  : libGDX
+
+button 1 : button 0
+button 2 : button 1
+button 3 : button 2
+button 4 : button 3
+button 9 : button 8
+button 10: button 9
+
+Lshoulder top : button 4
+Lshoulder btm : button 6
+Rshoulder top : button 5
+Rshoulder btm : button 7
+
+in second mode
+
+Dpad Up : axis 2 -
+Dpad Dn : axis 2 +
+Dpad Lf : axis 3 -
+Dpad Rt : axis 3 +

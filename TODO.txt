@@ -1,0 +1,2 @@
+Add controller support
+Make it loop through one or a few levels and restart on game over
