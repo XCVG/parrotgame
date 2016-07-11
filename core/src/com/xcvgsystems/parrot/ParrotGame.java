@@ -8,11 +8,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.xcvgsystems.hypergiant.EVars;
 import com.xcvgsystems.hypergiant.Engine;
+import com.xcvgsystems.hypergiant.PVars;
+import com.xcvgsystems.hypergiant.PVarsInterface;
 import com.xcvgsystems.hypergiant.managers.InputManager;
 import com.xcvgsystems.hypergiant.managers.SceneManager;
 
 public class ParrotGame extends ApplicationAdapter {
 
+	public ParrotGame(PVarsInterface pvars)
+	{
+		PVars.PLATFORM_ID = pvars.getPlatform();
+	}
+	
 	@Override
 	public void create() {
 

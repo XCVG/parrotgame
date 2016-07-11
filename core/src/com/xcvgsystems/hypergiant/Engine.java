@@ -24,8 +24,9 @@ public class Engine {
 	public static void init()
 	{
 		
-		System.out.print("Engine.init");
+		System.out.print("Engine.init");		
 		System.out.println("...");
+		System.out.println("On platform " + PVars.PLATFORM_ID.toString());
 		
 		if(Gdx.app.getType() == ApplicationType.Desktop)
 			keyboard = new BufferedReader(new InputStreamReader(System.in));

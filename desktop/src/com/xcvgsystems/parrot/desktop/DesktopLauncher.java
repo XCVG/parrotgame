@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.width = EVars.WINDOW_X;
 		config.height = EVars.WINDOW_Y;
 		config.title = GVars.GAME_NAME;
-		new LwjglApplication(new ParrotGame(), config);
+		new LwjglApplication(new ParrotGame(new DesktopPVarsData()), config);
 	}
 }
