@@ -50,6 +50,8 @@ public class Engine {
 		
 		StateManager.init();
 		
+		ScriptManager.init();
+		
 		System.out.print("...");
 		System.out.println("done!");		
 		
@@ -109,6 +111,8 @@ public class Engine {
 				e.printStackTrace();
 			}
 		keyboard = null;
+		
+		ScriptManager.dispose();
 		
 		StateManager.dispose();
 	
