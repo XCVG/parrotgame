@@ -56,6 +56,7 @@ public class TextureManager {
 		System.out.print("TextureManager.init...");
 		
 		BASE_TEX_PATH = Gdx.files.internal(EVars.BASE_PATH + "/textures/");
+		FileHandle gamePath = Gdx.files.internal(GVars.GAME_PATH);
 		
 		rawtextures = new HashMap<String, Texture>();
 		textures = new HashMap<String, TextureRegion>();
@@ -65,16 +66,18 @@ public class TextureManager {
 		//load null (transparent) and colour textures
 		initColors();
 		
-		//load all textures in teh textures folder and sprites folder
-		FileHandle gamePath = Gdx.files.internal(GVars.GAME_PATH);
-		FileHandle texturesPath = gamePath.child("textures");
-		FileHandle spritesPath = gamePath.child("sprites");
-		loadAll(texturesPath);
-		loadSprites(spritesPath);
-		
 		//load all raw textures in the patches folder
 		FileHandle patchesPath = gamePath.child("patches");
 		loadRaw(patchesPath);
+		
+		//load all textures defined in the TEXTURES file
+		loadTextures(gamePath.child("data").child("TEXTURES.json"));
+		
+		//load all textures in teh textures folder and sprites folder		
+		FileHandle texturesPath = gamePath.child("textures");
+		FileHandle spritesPath = gamePath.child("sprites");
+		loadAll(texturesPath);
+		loadSprites(spritesPath);	
 		
 		System.out.println("done!");
 	}
@@ -554,7 +557,7 @@ public class TextureManager {
 	 */
 	public static void loadTextures(FileHandle texdef)
 	{
-		
+		System.out.println(texdef.readString());
 	}
 	
 	/**
