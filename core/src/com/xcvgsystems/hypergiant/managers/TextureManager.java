@@ -48,7 +48,7 @@ public class TextureManager {
 	/**
 	 * Base/raw textures that are loaded.
 	 */
-	static Map<String, Texture> basetextures;
+	static Map<String, Texture> rawtextures;
 	
 	public static void init()
 	{
@@ -56,7 +56,7 @@ public class TextureManager {
 		
 		BASE_TEX_PATH = Gdx.files.internal(EVars.BASE_PATH + "/textures/");
 		
-		
+		rawtextures = new HashMap<String, Texture>();
 		textures = new HashMap<String, TextureRegion>();
 		NULL_TEX = new TextureRegion(new Texture(BASE_TEX_PATH.child("NULLTEX.png")));
 		NULL_TEX.flip(false, true);
@@ -70,6 +70,10 @@ public class TextureManager {
 		FileHandle spritesPath = gamePath.child("sprites");
 		loadAll(texturesPath);
 		loadSprites(spritesPath);
+		
+		//load all raw textures in the patches folder
+		FileHandle patchesPath = gamePath.child("patches");
+		loadRaw(patchesPath);
 		
 		System.out.println("done!");
 	}
@@ -461,6 +465,23 @@ public class TextureManager {
 			{
 				load(file.nameWithoutExtension(), file);
 			}
+		}
+	}
+	
+	/**
+	 * Loads all files in a directory as raw textures.
+	 * @param dir The directory to look in.
+	 */
+	public static void loadRaw(FileHandle dir)
+	{
+		FileHandle[] files = dir.list();
+		
+		for(FileHandle file : files)
+		{
+			Texture tex = new Texture(file);
+			if(EVars.FILTER)
+				tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+			rawtextures.put(file.nameWithoutExtension(), tex);
 		}
 	}
 	
