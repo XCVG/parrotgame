@@ -79,8 +79,11 @@ public class TextureManager {
 		FileHandle texturesPath = gamePath.child("textures");
 		FileHandle spritesPath = gamePath.child("sprites");
 		loadAll(texturesPath);
-		loadSprites(spritesPath);	
+		loadSprites(spritesPath);
 		
+		if(EVars.DEBUG)
+			System.out.println(listTextures());
+			
 		System.out.println("done!");
 	}
 	
@@ -241,7 +244,7 @@ public class TextureManager {
 				for(TextureRegion tex : row)
 				{
 					tex.flip(false, true);
-					textures.put((prefix + df.format(i)), tex);
+					textures.put((prefix + df.format(i)).toUpperCase(Locale.ROOT), tex);
 					i++; //I don't trust Java increment operators
 				}
 			}
@@ -254,7 +257,7 @@ public class TextureManager {
 				for(TextureRegion tex : row)
 				{
 					tex.flip(false, true);
-					textures.put((prefix + Integer.toHexString(i)), tex);
+					textures.put((prefix + Integer.toHexString(i)).toUpperCase(Locale.ROOT), tex);
 					i++; //I don't trust Java increment operators
 				}
 			}
@@ -263,29 +266,30 @@ public class TextureManager {
 		{
 			DecimalFormat df = new DecimalFormat("00");
 			
-			for(int y = 0; y < alltex.length; y++)
+			for(int x = 0; x < alltex.length; x++)
 			{
-				TextureRegion[] row = alltex[y];
+				TextureRegion[] row = alltex[x];
 				
-				for(int x = 0; x < row.length; x++)
+				for(int y = 0; y < row.length; y++)
 				{
-					TextureRegion tex = row[x];
+					TextureRegion tex = row[y];
 					tex.flip(false, true);
-					textures.put((prefix + df.format(x) + df.format(y)), tex);
+					textures.put((prefix + df.format(x) + df.format(y)).toUpperCase(Locale.ROOT), tex);
 				}
 			}
 		}
 		else if(type == NumberingType.HEX_XY)
 		{
-			for(int y = 0; y < alltex.length; y++)
+			for(int x = 0; x < alltex.length; x++)
 			{
-				TextureRegion[] row = alltex[y];
+				TextureRegion[] row = alltex[x];
 				
-				for(int x = 0; x < row.length; x++)
+				for(int y = 0; y < row.length; y++)
 				{
-					TextureRegion tex = row[x];
+					TextureRegion tex = row[y];
+					//System.err.println(prefix + Integer.toHexString(x) + Integer.toHexString(y));
 					tex.flip(false, true);
-					textures.put((prefix + Integer.toHexString(x) + Integer.toHexString(y)), tex);
+					textures.put((prefix + Integer.toHexString(x) + Integer.toHexString(y)).toUpperCase(Locale.ROOT), tex);
 				}
 			}
 		}
@@ -456,7 +460,7 @@ public class TextureManager {
 			Texture tex = new Texture(file);
 			if(EVars.FILTER)
 				tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-			rawtextures.put(file.nameWithoutExtension(), tex);
+			rawtextures.put(file.nameWithoutExtension().toUpperCase(Locale.ROOT), tex);
 		}
 	}
 	
@@ -484,7 +488,7 @@ public class TextureManager {
 					//if it's of type atlas, get name, file, and numbering type
 					String name = child.getString("name");
 					String base = child.getString("file");
-					Texture basetex = rawtextures.get(base);
+					Texture basetex = rawtextures.get(base.toUpperCase(Locale.ROOT));
 					
 					//decode numbering type
 					NumberingType ntype = NumberingType.valueOf(child.getString("numbering").toUpperCase(Locale.ROOT)); 
@@ -514,7 +518,7 @@ public class TextureManager {
 				{
 					String name = child.getString("name");
 					String base = child.getString("file");
-					Texture basetex = rawtextures.get(base);
+					Texture basetex = rawtextures.get(base.toUpperCase(Locale.ROOT));
 					int width = child.getInt("width");
 					int height = child.getInt("height");
 					int x = child.getInt("x");
@@ -597,7 +601,9 @@ public class TextureManager {
 		
 		while(it.hasNext())
 		{
-			str += it.next().toString() + "\n";
+			//str += it.next().toString() + "\n";
+			
+			str += it.next().getKey() + "\n";
 		}
 		
 		return str;
