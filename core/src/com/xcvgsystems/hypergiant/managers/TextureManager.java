@@ -1,5 +1,6 @@
 package com.xcvgsystems.hypergiant.managers;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -316,7 +317,66 @@ public class TextureManager {
 	 */
 	public static void loadAtlas(String prefix, Texture baseTex, int width, int height, NumberingType type)
 	{
-		//TODO
+		//a hack to make the texture names look right
+		prefix = prefix + "_";
+		
+		//split the texture
+		TextureRegion[][] alltex = TextureRegion.split(baseTex, width, height);
+		
+		if(type == NumberingType.DECIMAL_SEQUENTIAL)
+		{
+			DecimalFormat df = new DecimalFormat("000");
+			
+			int i = 0;
+			for(TextureRegion[] row : alltex)
+			{
+				for(TextureRegion tex : row)
+				{
+					textures.put((prefix + df.format(i)), tex);
+					i++; //I don't trust Java increment operators
+				}
+			}
+		}
+		else if(type == NumberingType.HEX_SEQUENTIAL)
+		{
+			int i = 0;
+			for(TextureRegion[] row : alltex)
+			{
+				for(TextureRegion tex : row)
+				{
+					textures.put((prefix + Integer.toHexString(i)), tex);
+					i++; //I don't trust Java increment operators
+				}
+			}
+		}
+		else if(type == NumberingType.DECIMAL_XY)
+		{
+			DecimalFormat df = new DecimalFormat("00");
+			
+			for(int y = 0; y < alltex.length; y++)
+			{
+				TextureRegion[] row = alltex[y];
+				
+				for(int x = 0; x < row.length; x++)
+				{
+					TextureRegion tex = row[x];
+					textures.put((prefix + df.format(x) + df.format(y)), tex);
+				}
+			}
+		}
+		else if(type == NumberingType.HEX_XY)
+		{
+			for(int y = 0; y < alltex.length; y++)
+			{
+				TextureRegion[] row = alltex[y];
+				
+				for(int x = 0; x < row.length; x++)
+				{
+					TextureRegion tex = row[x];
+					textures.put((prefix + Integer.toHexString(x) + Integer.toHexString(y)), tex);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -342,7 +402,10 @@ public class TextureManager {
 	 */
 	public static void loadAtlasNum(String prefix, Texture baseTex, int numx, int numy, NumberingType type)
 	{
-		//TODO
+		int width = baseTex.getWidth() / numx;
+		int height = baseTex.getHeight() / numy;
+		
+		loadAtlas(prefix, baseTex, width, height, type);
 	}
 	
 	/**
@@ -483,6 +546,15 @@ public class TextureManager {
 				tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 			rawtextures.put(file.nameWithoutExtension(), tex);
 		}
+	}
+	
+	/**
+	 * Loads textures based on a TEXTURES file.
+	 * @param texdef FileHandle of the TEXTURES.json file
+	 */
+	public static void loadTextures(FileHandle texdef)
+	{
+		
 	}
 	
 	/**
