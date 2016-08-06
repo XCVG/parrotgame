@@ -138,7 +138,7 @@ public class TextureManager {
 		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
 		p.setColor(0.667f, 0.333f, 0, 1.0f);
 		p.drawPixel(0, 0);
-		textures.put("!MAGENTA", new TextureRegion(new Texture(p)));
+		textures.put("!BROWN", new TextureRegion(new Texture(p)));
 		p.dispose();
 		
 		//!LIGHTGRAY
