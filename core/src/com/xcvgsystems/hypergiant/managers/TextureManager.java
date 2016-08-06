@@ -26,6 +26,8 @@ public class TextureManager {
 
 	//TODO: caching and better handling of context is coming later
 
+	private final static String[] colornames = new String[] {"!BLACK", "!BLUE", "!GREEN", "!CYAN", "!RED", "!MAGENTA", "!BROWN", "!LIGHTGRAY", "!GRAY", "!LIGHTBLUE", "!LIGHTGREEN", "!LIGHTCYAN", "!LIGHTRED", "!LIGHTMAGENTA", "!YELLOW", "!WHITE"};
+
 	/**
 	 * Numbering types for loading atlases and such.
 	 * @author Chris
@@ -60,8 +62,6 @@ public class TextureManager {
 		
 		rawtextures = new HashMap<String, Texture>();
 		textures = new HashMap<String, TextureRegion>();
-		NULL_TEX = new TextureRegion(new Texture(BASE_TEX_PATH.child("NULLTEX.png")));
-		NULL_TEX.flip(false, true);
 		
 		//load null (transparent) and colour textures
 		initColors();
@@ -84,126 +84,29 @@ public class TextureManager {
 	
 	private static void initColors()
 	{
-		//null/transparent texture
-		textures.put("!NULL", new TextureRegion(new Texture(BASE_TEX_PATH.child("TRANTEX.png"))));
+		//handle NULL_TEX
+		Texture nt;
+		
+		nt = new Texture(BASE_TEX_PATH.child("NULLTEX.png"));
+		rawtextures.put("NULLTEX", nt);
+		NULL_TEX = new TextureRegion(nt);
+		NULL_TEX.flip(false, true);
+		
+		//handle special !NULL
+		nt = new Texture(BASE_TEX_PATH.child("TRANTEX.png"));
+		textures.put("!NULL", new TextureRegion(nt));
 		
 		//TODO replace this with loading from a file
 		
-		//TODO: load colours!
-		Pixmap p;
+		//load colours!
 		
-		//!BLACK
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0, 0, 0, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!BLACK", new TextureRegion(new Texture(p)));
-		p.dispose();
+		Texture ct = new Texture(BASE_TEX_PATH.child("COLORTEX.png"));
+		rawtextures.put("COLORTEX", ct);
 		
-		//!BLUE
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0, 0, 0.667f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!BLUE", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!GREEN
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0, 0.667f, 0, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!GREEN", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!CYAN
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0, 0.667f, 0.667f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!CYAN", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!RED
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.667f, 0, 0, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!RED", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!MAGENTA
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.667f, 0, 0.667f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!MAGENTA", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!BROWN
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.667f, 0.333f, 0, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!BROWN", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTGRAY
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.667f, 0.667f, 0.667f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTGRAY", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!GRAY
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.333f, 0.333f, 0.333f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!GRAY", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTBLUE
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.333f, 0.333f, 1.0f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTBLUE", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTGREEN
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.333f, 1.0f, 0.333f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTGREEN", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTCYAN
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(0.333f, 1.0f, 1.0f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTCYAN", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTRED
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(1.0f, 0.333f, 0.333f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTRED", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!LIGHTMAGENTA
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(1.0f, 0.333f, 1.0f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!LIGHTMAGENTA", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!YELLOW
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(1.0f, 1.0f, 0.333f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!YELLOW", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
-		//!WHITE
-		p = new Pixmap(1,1,Pixmap.Format.RGBA8888);
-		p.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		p.drawPixel(0, 0);
-		textures.put("!WHITE", new TextureRegion(new Texture(p)));
-		p.dispose();
-		
+		for(int i = 0; i < colornames.length; i++)
+		{
+			textures.put(colornames[i], new TextureRegion(ct,i,0,1,1));
+		}		
 		
 	}
 	
@@ -651,7 +554,15 @@ public class TextureManager {
 		
 		while(it2.hasNext())
 		{
-			it2.next().getValue().dispose();
+			Texture t = it2.next().getValue();
+			try
+			{
+				t.dispose();
+			}
+			catch(Exception e)
+			{
+				
+			}
 			it2.remove();
 		}
 		
