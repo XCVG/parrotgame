@@ -13,6 +13,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.xcvgsystems.hypergiant.EVars;
 import com.xcvgsystems.hypergiant.GVars;
 import com.xcvgsystems.hypergiant.managers.TextureManager.NumberingType;
@@ -238,6 +240,7 @@ public class TextureManager {
 			{
 				for(TextureRegion tex : row)
 				{
+					tex.flip(false, true);
 					textures.put((prefix + df.format(i)), tex);
 					i++; //I don't trust Java increment operators
 				}
@@ -250,6 +253,7 @@ public class TextureManager {
 			{
 				for(TextureRegion tex : row)
 				{
+					tex.flip(false, true);
 					textures.put((prefix + Integer.toHexString(i)), tex);
 					i++; //I don't trust Java increment operators
 				}
@@ -266,6 +270,7 @@ public class TextureManager {
 				for(int x = 0; x < row.length; x++)
 				{
 					TextureRegion tex = row[x];
+					tex.flip(false, true);
 					textures.put((prefix + df.format(x) + df.format(y)), tex);
 				}
 			}
@@ -279,6 +284,7 @@ public class TextureManager {
 				for(int x = 0; x < row.length; x++)
 				{
 					TextureRegion tex = row[x];
+					tex.flip(false, true);
 					textures.put((prefix + Integer.toHexString(x) + Integer.toHexString(y)), tex);
 				}
 			}
@@ -461,6 +467,73 @@ public class TextureManager {
 	public static void loadTextures(FileHandle texdef)
 	{
 		//System.out.println(texdef.readString());
+		String text = texdef.readString();
+		
+		JsonValue root = new JsonReader().parse(text);
+		for(JsonValue child : root)
+		{
+			//Pokemon exception handling
+			try
+			{
+				//System.out.println(child.toString());
+				//these *should be* texture definitions
+				//System.out.println(child.getString("type"));
+				String type = child.getString("type");
+				if(type.equalsIgnoreCase("atlas"))
+				{
+					//if it's of type atlas, get name, file, and numbering type
+					String name = child.getString("name");
+					String base = child.getString("file");
+					Texture basetex = rawtextures.get(base);
+					
+					//decode numbering type
+					NumberingType ntype = NumberingType.valueOf(child.getString("numbering").toUpperCase(Locale.ROOT)); 
+					
+					//if it contains width node, split on sized tiles
+					if(child.has("width"))
+					{
+						int width = child.getInt("width");
+						int height = child.getInt("height");				
+						
+						loadAtlas(name,basetex,width,height,ntype);
+					}
+					else if(child.has("numx"))
+					{
+						int numx = child.getInt("numx");
+						int numy = child.getInt("numy");
+						
+						loadAtlasNum(name,basetex,numx,numy,ntype);
+					}
+					//if it contains numx node, split on number of tiles
+					else
+					{
+						System.err.println("Invalid TEXTURES entry");
+					}
+				}
+				else if(type.equalsIgnoreCase("texture"))
+				{
+					String name = child.getString("name");
+					String base = child.getString("file");
+					Texture basetex = rawtextures.get(base);
+					int width = child.getInt("width");
+					int height = child.getInt("height");
+					int x = child.getInt("x");
+					int y = child.getInt("y");
+					
+					loadRegion(name,basetex,x,y,width,height);
+				}
+				else
+				{
+					System.err.println("Unrecognized texture definition: type " + type);
+				}
+			}
+			catch(Exception e)
+			{
+				System.err.println("Failed to load texture in TEXTURES file!");
+				if(EVars.DEBUG)
+					e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
