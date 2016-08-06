@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.xcvgsystems.hypergiant.EVars;
 import com.xcvgsystems.hypergiant.GVars;
+import com.xcvgsystems.hypergiant.managers.TextureManager.NumberingType;
 
 /**
  * Integrated texture manager.
@@ -22,11 +23,17 @@ import com.xcvgsystems.hypergiant.GVars;
  */
 public class TextureManager {
 
-	//TODO: figure out how to deal with OpenGL context loss and that sort of thing
-	//we don't know if the textures are managed or not from here
-	
-	//TODO: this may need significant improvements for efficiency: I'm not sure how cleanly it manages memory
-	//have to figure out when to dispose what
+	//TODO: caching and better handling of context is coming later
+
+	/**
+	 * Numbering types for loading atlases and such.
+	 * @author Chris
+	 *
+	 */
+	public enum NumberingType
+	{
+		DECIMAL_XY, DECIMAL_SEQUENTIAL, HEX_XY, HEX_SEQUENTIAL
+	}
 
 	//nonexistent texture
 	private static TextureRegion NULL_TEX;
@@ -37,6 +44,11 @@ public class TextureManager {
 	 * ALL the textures!
 	 */
 	static Map<String, TextureRegion> textures;
+	
+	/**
+	 * Base/raw textures that are loaded.
+	 */
+	static Map<String, Texture> basetextures;
 	
 	public static void init()
 	{
@@ -66,6 +78,8 @@ public class TextureManager {
 	{
 		//null/transparent texture
 		textures.put("!NULL", new TextureRegion(new Texture(BASE_TEX_PATH.child("TRANTEX.png"))));
+		
+		//TODO replace this with loading from a file
 		
 		//TODO: load colours!
 		Pixmap p;
@@ -288,6 +302,57 @@ public class TextureManager {
 		}
 	}
 	
+	/**
+	 * Loads a texture atlas from a base texture
+	 * @param prefix The base name of the texture
+	 * @param baseTex The texture to cut up.
+	 * @param width The width of each tile
+	 * @param height The height of each tile
+	 * @param type The numbering type to use.
+	 */
+	public static void loadAtlas(String prefix, Texture baseTex, int width, int height, NumberingType type)
+	{
+		//TODO
+	}
+	
+	/**
+	 * Atlas load method, loads from a libGDX FileHandle.
+	 * @param prefix The base name of the texture
+	 * @param file The texture (from FileHandle)
+	 * @param width The width of each tile
+	 * @param height The height of each tile
+	 * @param type The numbering type to use.
+	 */
+	public static void loadAtlas(String prefix, FileHandle file, int width, int height, NumberingType type)
+	{
+		loadAtlas(prefix, new Texture(file), width, height, type);
+	}
+	
+	/**
+	 * Loads a texture atlas from a base texture, calculating tile size automatically
+	 * @param prefix The base name of the texture
+	 * @param baseTex The texture to cut up.
+	 * @param numx The number of tiles horizontally
+	 * @param numy The number of tiles vertically
+	 * @param type The numbering type to use.
+	 */
+	public static void loadAtlasNum(String prefix, Texture baseTex, int numx, int numy, NumberingType type)
+	{
+		//TODO
+	}
+	
+	/**
+	 * Atlas load method, loads from a libGDX FileHandle.
+	 * @param prefix The base name of the texture
+	 * @param file The texture (from FileHandle)
+	 * @param numx The number of tiles horizontally
+	 * @param numy The number of tiles vertically
+	 * @param type The numbering type to use.
+	 */
+	public static void loadAtlasNum(String prefix, FileHandle file, int numx, int numy, NumberingType type)
+	{
+		loadAtlasNum(prefix, new Texture(file), numx, numy, type);
+	}	
 	
 	/**
 	 * Sprite (4 dir) load method. Loads from a libGDX FileHandle.
