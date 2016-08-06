@@ -557,7 +557,7 @@ public class TextureManager {
 	 */
 	public static void loadTextures(FileHandle texdef)
 	{
-		System.out.println(texdef.readString());
+		//System.out.println(texdef.readString());
 	}
 	
 	/**
@@ -635,6 +635,7 @@ public class TextureManager {
 
 		System.out.print("TextureManager.dispose...");
 
+		//deal with processed textures
 		Set<Map.Entry<String,TextureRegion>> entrySet = textures.entrySet();
 		Iterator<Entry<String, TextureRegion>> it = entrySet.iterator();
 		
@@ -642,6 +643,16 @@ public class TextureManager {
 		{
 			it.next().getValue().getTexture().dispose();
 			it.remove();
+		}
+		
+		//deal with raw textures
+		Set <Map.Entry<String, Texture>> entrySet2 = rawtextures.entrySet();
+		Iterator<Entry<String, Texture>> it2 = entrySet2.iterator();
+		
+		while(it2.hasNext())
+		{
+			it2.next().getValue().dispose();
+			it2.remove();
 		}
 		
 		System.out.println("done!");
